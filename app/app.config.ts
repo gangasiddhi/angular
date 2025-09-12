@@ -14,3 +14,4 @@ export const appConfig: ApplicationConfig = {
     provideStore({})  // Provide the store with an initial state
 ]
 };
+  
