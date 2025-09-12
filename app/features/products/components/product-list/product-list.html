@@ -1,0 +1,20 @@
+<ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (product of products$ | async; track product.id) {
+
+                <tr>
+                    <td>{{ product.title }}</td>
+                    <td>${{ product.price }}</td>
+                    <td><a [routerLink]="['/products', product.id]">view</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</ul>

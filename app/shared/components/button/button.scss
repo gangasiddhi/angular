@@ -1,0 +1,40 @@
+// Base styles for all buttons using @apply
+
+@reference "tailwindcss";
+
+.btn {
+  @apply py-2 px-4 rounded-md font-semibold transition-colors duration-200;
+
+  &:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+}
+
+// Variant-specific styles using nested SCSS and @apply
+.btn-primary {
+  @apply bg-blue-500 text-white;
+  &:hover:not(:disabled) {
+    @apply bg-blue-600;
+  }
+}
+
+.btn-secondary {
+  @apply bg-gray-500 text-white;
+  &:hover:not(:disabled) {
+    @apply bg-gray-600;
+  }
+}
+
+.btn-accent {
+  @apply bg-yellow-400 text-black;
+  &:hover:not(:disabled) {
+    @apply bg-yellow-500;
+  }
+}
+
+.btn-danger {
+  @apply bg-red-500 text-white;
+  &:hover:not(:disabled) {
+    @apply bg-red-600;
+  }
+}

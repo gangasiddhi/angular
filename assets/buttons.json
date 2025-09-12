@@ -1,0 +1,20 @@
+[
+  {
+    "text": "Save",
+    "type": "submit",
+    "variant": "primary",
+    "disabled": false,
+    "action": "save"
+  },
+  {
+    "text": "Cancel",
+    "variant": "secondary",
+    "action": "cancel"
+  },
+  {
+    "text": "Delete",
+    "variant": "accent",
+    "disabled": true,
+    "action": "delete"
+  }
+]

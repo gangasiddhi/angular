@@ -1,0 +1,22 @@
+@if(breadcrumbs.length > 1){
+    <nav aria-label="Breadcrumb">
+  <ol class="inline-flex items-center space-x-1 md:space-x-2">
+    @for (breadcrumb of breadcrumbs; track breadcrumb.label; let isLast = $last) {
+        @if(isLast) {
+           <li aria-current="page">
+            <div class="flex items-center">
+                <span class="mx-2 text-gray-400">/</span>
+                <span class="text-sm font-medium text-gray-500 dark:text-gray-300 font-bold">{{ breadcrumb.label }}</span>
+            </div>
+            </li>
+        } @else {
+        <li class="inline-flex items-center">
+            <a [routerLink]="breadcrumb.url" class="text-sm text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white cursor:pointer">
+                    {{ breadcrumb.label }} 
+            </a>
+        </li>
+        }
+    }
+  </ol>
+</nav>
+}
