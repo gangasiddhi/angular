@@ -2,9 +2,18 @@
 <div class="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-2 gap-10">
   <!-- Image Gallery -->
   <div class="space-y-4">
-    <img [src]="product['images'][0]" alt="Main product image" class="w-full h-auto rounded-lg shadow" />
+    <img
+      [src]="product['images'][0]"
+      alt="Main product image"
+      class="w-full h-auto rounded-lg shadow"
+    />
     <div class="flex gap-2">
-      <img *ngFor="let img of product['images'].slice(1)" [src]="img" class="w-20 h-20 rounded-md border cursor-pointer hover:opacity-75" />
+      <img
+        *ngFor="let img of product['images'].slice(1)"
+        [src]="img"
+        alt="Product image"
+        class="w-20 h-20 rounded-md border cursor-pointer hover:opacity-75"
+      />
     </div>
   </div>
 
@@ -17,18 +26,27 @@
 
     <div class="text-2xl text-green-600 font-semibold">
       ${{ product['price'] }}
-      <span class="ml-2 text-sm text-gray-400 line-through">${{ (product['price'] / (1 - product['discountPercentage'] / 100)).toFixed(2) }}</span>
+      <span class="ml-2 text-sm text-gray-400 line-through"
+        >${{ (product['price'] / (1 - product['discountPercentage'] /
+        100)).toFixed(2) }}</span
+      >
     </div>
 
     <p class="text-gray-700">{{ product['description'] }}</p>
 
-    <p class="text-sm text-yellow-600 font-medium">{{ product['availabilityStatus'] }} ({{ product['stock'] }} left)</p>
+    <p class="text-sm text-yellow-600 font-medium">
+      {{ product['availabilityStatus'] }} ({{ product['stock'] }} left)
+    </p>
 
     <!-- Quantity and Add to Cart -->
     <div class="flex items-center space-x-4">
-      <label class="text-sm font-medium text-gray-700">Qty:</label>
+      <!-- <label class="text-sm font-medium text-gray-700">Qty:</label> -->
       <!-- <input type="number" [(ngModel)]="quantity" [min]="product['minimumOrderQuantity']" class="w-20 px-3 py-2 border rounded-md" /> -->
-      <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md">Add to Cart</button>
+      <button
+        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
+      >
+        Add to Cart
+      </button>
     </div>
 
     <!-- Shipping & Return Info -->
@@ -42,7 +60,9 @@
       <h2 class="text-lg font-semibold mb-3">Customer Reviews</h2>
       <div *ngFor="let review of product['reviews']" class="mb-4">
         <!-- {{ review['reviewerName'] }} -->
-        <p class="font-medium text-gray-800"> <span class="text-yellow-500">★ {{ review['rating'] }}</span></p>
+        <p class="font-medium text-gray-800">
+          <span class="text-yellow-500">★ {{ review['rating'] }}</span>
+        </p>
         <p class="text-gray-600 italic">"{{ review['comment'] }}"</p>
         <p class="text-xs text-gray-400">{{ review['date'] | date }}</p>
       </div>

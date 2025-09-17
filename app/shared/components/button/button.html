@@ -1,3 +1,7 @@
- <button [type]="config().type || 'button'" [disabled]="config().disabled" (click)="onClick()">
-      {{ config().text }}
-    </button>
+<button
+  [type]="config().type || 'button'"
+  [disabled]="config().disabled"
+  (click)="onClick()"
+>
+  {{ config().text }}
+</button>

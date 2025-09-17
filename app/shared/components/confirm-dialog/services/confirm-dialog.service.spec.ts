@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { ConfirmDialogService } from './confirm-dialog.service';
+import { ConfirmDialogService } from "./confirm-dialog.service";
 
-describe('ConfirmDialogService', () => {
+describe("ConfirmDialogService", () => {
   let service: ConfirmDialogService;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('ConfirmDialogService', () => {
     service = TestBed.inject(ConfirmDialogService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 });

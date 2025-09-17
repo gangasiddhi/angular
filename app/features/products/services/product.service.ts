@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Product } from '../model/product.model';
-import { FeatureService } from '@core/services/feature.service';
+import { Injectable } from "@angular/core";
+import { Product } from "../model/product.model";
+import { FeatureService } from "@core/services/feature.service";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class ProductService extends FeatureService<Product> {
-  constructor() {
-    super('products');
-  }
+  protected endpoint = "products";
 }

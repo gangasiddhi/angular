@@ -1,0 +1,9 @@
+<aside class="w-64 bg-gray-800 text-white flex-shrink-0 h-screen">
+    <div class="p-4 text-2xl font-bold border-b border-gray-700">MyApp</div>
+    <nav class="p-4 space-y-2">
+        @for(menu of menuData; track menu.routeLink){
+        <a [routerLink]="menu.routeLink" routerLinkActive="active-link"
+            class="block px-4 py-2 rounded hover:bg-gray-700">{{menu.label}}</a>
+        }
+    </nav>
+</aside>

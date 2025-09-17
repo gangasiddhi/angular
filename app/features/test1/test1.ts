@@ -1,33 +1,35 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PendingChangesInterface } from '@shared/interfaces/pending-changes.interface';
-import { Observable } from 'rxjs';
+import { CommonModule } from "@angular/common";
+import { Component, inject, signal } from "@angular/core";
+import { Router, RouterModule } from "@angular/router";
+import { FormBuilder, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { PendingChangesInterface } from "@shared/interfaces/pending-changes.interface";
+import { Observable } from "rxjs";
 
 @Component({
-  selector: 'app-test1',
+  selector: "app-test1",
   standalone: true,
-  imports: [CommonModule,RouterModule,FormsModule,ReactiveFormsModule],
-  templateUrl: './test1.html',
-  styleUrl: './test1.scss',
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
+  templateUrl: "./test1.html",
+  styleUrl: "./test1.scss",
 })
 export class Test1 implements PendingChangesInterface {
- // Use a Signal to make the state reactive
-  currentPage = signal('test');
+  // Use a Signal to make the state reactive
+  currentPage = signal("test");
 
   private readonly _router = inject(Router);
   protected readonly _formBuilder = inject(FormBuilder);
 
   protected testForm = this._formBuilder.group({
-    name: [''],
-    email: ['']
+    name: [""],
+    email: [""],
   });
 
   hasUnsavedChanges = signal(false);
 
   constructor() {
-    this.testForm.valueChanges.subscribe(() => this.hasUnsavedChanges.set(true));
+    this.testForm.valueChanges.subscribe(() =>
+      this.hasUnsavedChanges.set(true),
+    );
   }
 
   hasPendingChanges(): boolean | Observable<boolean> {
