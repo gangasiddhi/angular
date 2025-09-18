@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from "@angular/core";
 import { Store, select } from "@ngrx/store";
 import { productActions } from "../../store/product-actions";
 import { productSelectors } from "../../store/product-selectors";
@@ -9,11 +9,11 @@ import { Product } from "../../model/product.model";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
-  selector: "app-product-details",
   standalone: true,
   imports: [CommonModule],
   templateUrl: "./product-details.html",
   styleUrl: "./product-details.scss",
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class ProductDetails implements OnInit {
   private readonly _store = inject(Store);

@@ -8,7 +8,6 @@ import {
 import { ButtonConfig } from "./button-config";
 
 @Component({
-  selector: "app-button",
   standalone: true,
   imports: [],
   templateUrl: "./button.html",

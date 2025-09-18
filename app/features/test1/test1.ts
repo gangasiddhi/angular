@@ -1,16 +1,16 @@
 import { CommonModule } from "@angular/common";
-import { Component, inject, signal } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject, signal } from "@angular/core";
 import { Router, RouterModule } from "@angular/router";
 import { FormBuilder, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PendingChangesInterface } from "@shared/interfaces/pending-changes.interface";
 import { Observable } from "rxjs";
 
 @Component({
-  selector: "app-test1",
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
   templateUrl: "./test1.html",
   styleUrl: "./test1.scss",
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Test1 implements PendingChangesInterface {
   // Use a Signal to make the state reactive

@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
 import {
+  ChangeDetectionStrategy,
   Component,
 } from "@angular/core";
 import {
@@ -8,10 +9,11 @@ import {
 } from "@angular/router";
 
 @Component({
-  selector: 'app-side-menubar',
+  standalone: true,
   imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './side-menubar.html',
-  styleUrl: './side-menubar.scss'
+  styleUrl: './side-menubar.scss',
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 
 export class SideMenubar {
@@ -28,10 +30,6 @@ export class SideMenubar {
     {
       routeLink: '/test2',
       label: 'Test2'
-    },
-    {
-      routeLink: '/test3',
-      label: 'Test3'
     },
     {
       routeLink: '/products',

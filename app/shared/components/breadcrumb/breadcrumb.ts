@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit } from "@angular/core";
 import {
   ActivatedRoute,
   NavigationEnd,
@@ -11,17 +11,19 @@ import { CommonModule } from "@angular/common";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
-  selector: "app-breadcrumb",
   standalone: true,
   imports: [RouterLink, CommonModule],
   templateUrl: "./breadcrumb.html",
   styleUrl: "./breadcrumb.scss",
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Breadcrumb implements OnInit {
   private readonly _router = inject(Router);
   private readonly _activatedRoute = inject(ActivatedRoute);
-  protected breadcrumbs: BreadcrumbInterface[] = [];
   private readonly _destroyRef = inject(DestroyRef);
+  private readonly _cdr = inject(ChangeDetectorRef);
+
+  protected breadcrumbs: BreadcrumbInterface[] = [];
 
   public breadcrumbs$: Observable<BreadcrumbInterface[]> =
     this._activatedRoute.data.pipe(map((data) => data["breadcrumbs"] || []));
@@ -34,6 +36,8 @@ export class Breadcrumb implements OnInit {
       )
       .subscribe(() => {
         this.breadcrumbs = this.createBreadcrumbs(this._activatedRoute.root);
+        this._cdr.detectChanges();
+        this._cdr.detach();
       });
   }
 

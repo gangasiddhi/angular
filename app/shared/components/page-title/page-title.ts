@@ -4,6 +4,7 @@ import {
   DestroyRef,
   inject,
   OnInit,
+  ChangeDetectionStrategy
 } from "@angular/core";
 import {
   ActivatedRoute,
@@ -15,13 +16,13 @@ import { Title } from "@angular/platform-browser";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
-  selector: 'app-page-title',
   standalone: true,
   imports: [],
   templateUrl: './page-title.html',
-  styleUrl: './page-title.scss'
+  styleUrl: './page-title.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PageTitle {
+export class PageTitle implements OnInit {
 
   protected title = "";
   private readonly _cdr = inject(ChangeDetectorRef);
@@ -57,10 +58,12 @@ export class PageTitle {
 
         // Update the title property
         if (title) {
-          this.title =  title;
+          this.title = title;
         }
 
         this._titleService.setTitle(this.title);
+        this._cdr.detectChanges();
+        this._cdr.detach();
       });
   }
 }

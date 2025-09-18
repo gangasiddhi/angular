@@ -1,8 +1,10 @@
 import {
-  ChangeDetectorRef,
+  ChangeDetectionStrategy,
   Component,
   inject,
+  ViewContainerRef,
 } from "@angular/core";
+import { NgComponentOutlet } from '@angular/common';
 import {
   RouterOutlet,
 } from "@angular/router";
@@ -14,22 +16,26 @@ import { SideMenubar } from "@shared/components/side-menubar/side-menubar";
 @Component({
   standalone: true,
   selector: "app-root",
-  imports: [RouterOutlet, Breadcrumb, PageTitle, SideMenubar],
+  imports: [RouterOutlet, NgComponentOutlet],
   templateUrl: "./app.html",
   styleUrl: "./app.scss",
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class App {
-  private readonly _cdr = inject(ChangeDetectorRef);
+  protected breadcrumb = Breadcrumb;
+  protected pageTitle = PageTitle;
+  protected sideMenubar = SideMenubar;
+  protected viewContainerRef = inject(ViewContainerRef);
+
+  constructor() {
+    console.log(this.viewContainerRef);
+  }
 
   config: ButtonConfig = {
     text: "Cancel",
     variant: "secondary",
     action: "cancel",
   };
-
-  onActivate() {
-    this._cdr.markForCheck();
-  }
 
   handleButtonClick(action: string) {
     console.log(`Action: ${action}`);

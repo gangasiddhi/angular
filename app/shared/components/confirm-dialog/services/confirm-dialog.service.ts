@@ -12,7 +12,6 @@ export class ConfirmDialogService {
 
   confirm(data: ConfirmDialogDataInterface): Observable<boolean> {
     const dialogRef = this._dialog.open(ConfirmDialog, {
-      width: "400px",
       disableClose: true,
       panelClass: "custom-dialog-container",
       data: {
