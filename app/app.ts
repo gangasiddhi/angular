@@ -5,9 +5,7 @@ import {
   ViewContainerRef,
 } from "@angular/core";
 import { NgComponentOutlet } from '@angular/common';
-import {
-  RouterOutlet,
-} from "@angular/router";
+import { RouterOutlet } from "@angular/router";
 import { ButtonConfig } from "./shared/components/button/button-config";
 import { Breadcrumb } from "@shared/components/breadcrumb/breadcrumb";
 import { PageTitle } from "@shared/components/page-title/page-title";
@@ -19,7 +17,7 @@ import { SideMenubar } from "@shared/components/side-menubar/side-menubar";
   imports: [RouterOutlet, NgComponentOutlet],
   templateUrl: "./app.html",
   styleUrl: "./app.scss",
-  changeDetection:ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class App {
   protected breadcrumb = Breadcrumb;
