@@ -3,17 +3,17 @@ import { Store, select } from "@ngrx/store";
 import { productActions } from "../../store/product-actions";
 import { productSelectors } from "../../store/product-selectors";
 import { map, Observable } from "rxjs";
-import { CommonModule } from "@angular/common";
+import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { Product } from "../../model/product.model";
 import { RouterLink } from "@angular/router";
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, NgOptimizedImage],
   templateUrl: "./product-list.html",
   styleUrl: "./product-list.scss",
-  changeDetection:ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductList implements OnInit {
   private readonly _store = inject(Store);
@@ -22,10 +22,10 @@ export class ProductList implements OnInit {
   protected readonly products$: Observable<Product[]> = this._store.pipe(
     select(productSelectors.selectEntities),
     takeUntilDestroyed(this._destroyRef),
-    map((products:any) => products?.products || []),
+    map((products: any) => products?.products || []),
   );
 
   ngOnInit(): void {
-    this._store.dispatch(productActions.loadAll());
+    this._store.dispatch(productActions.loadAll({ filters: { id: 1 } }));
   }
 }

@@ -5,7 +5,10 @@ export function createFeatureActions<T>(entity: string) {
   const capitalized = entity.charAt(0).toUpperCase() + entity.slice(1);
 
   return {
-    loadAll: createAction(`[${capitalized}] Load All`),
+    loadAll: createAction(
+      `[${capitalized}] Load All`,
+      props<{ filters?: any }>(),
+    ),
     loadAllSuccess: createAction(
       `[${capitalized}] Load All Success`,
       props<{ data: T[] }>(),

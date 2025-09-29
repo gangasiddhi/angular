@@ -1,0 +1,13 @@
+@if(hasError){
+<mat-spinner></mat-spinner>
+} @else {
+<img
+  [src]="hasError ? config().fallback : config().src"
+  [alt]="config().alt"
+  [width]="config().width"
+  [height]="config().height"
+  [class]="config().class"
+  [attr.loading]="config().loading"
+  (error)="onError()"
+/>
+}

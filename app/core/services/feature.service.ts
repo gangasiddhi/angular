@@ -30,7 +30,7 @@ export abstract class FeatureService<T> {
 
   // Generic PUT method
   update(id: string | number, body: T): Observable<T> {
-    return this._http.put<T>(`${this._apiUrl}/${this.endpoint}`, body);
+    return this._http.put<T>(`${this._apiUrl}/${this.endpoint}/${id}`, body);
   }
 
   // Generic DELETE method

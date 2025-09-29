@@ -1,15 +1,17 @@
-<ul>
-  <table>
+  <table class="w-full text-center">
     <thead>
       <tr>
+        <th></th>
         <th>Product</th>
         <th>Price</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       @for (product of products$ | async; track product.id) {
 
-      <tr>
+      <tr class="border-b-1">
+        <td><img [ngSrc]="product['images'][0]" width="64" height="64"></td>
         <td>{{ product.title }}</td>
         <td>${{ product.price }}</td>
         <td><a [routerLink]="['/products', product.id]">view</a></td>
@@ -17,4 +19,4 @@
       }
     </tbody>
   </table>
-</ul>
+

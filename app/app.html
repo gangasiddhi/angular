@@ -1,12 +1,12 @@
 <div class="flex h-screen">
   <!-- Sidebar -->
-  <ng-container *ngComponentOutlet="sideMenubar"></ng-container>
+  <ng-container [ngComponentOutlet]="sideMenubar()"></ng-container>
 
 
   <!-- Main content -->
   <main class="flex-1 p-6 bg-gray-100 overflow-y-auto">
-    <ng-container *ngComponentOutlet="pageTitle"></ng-container>
-    <ng-container *ngComponentOutlet="breadcrumb"></ng-container>
+    <ng-container [ngComponentOutlet]="pageTitle()"></ng-container>
+    <ng-container [ngComponentOutlet]="breadcrumb()"></ng-container>
     <div class="mt-4 text-gray-700">
       <router-outlet />
     </div>

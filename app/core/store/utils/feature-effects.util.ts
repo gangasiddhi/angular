@@ -7,7 +7,7 @@ export function createFeatureEffects<T extends object>(
   actions$: Actions,
   actions: ReturnType<typeof createFeatureActions<T>>,
   service: {
-    getAll: () => Observable<T[]>;
+    getAll: (filters:any) => Observable<T[]>;
     getById: (id: string | number) => Observable<T>;
     create: (data: T) => Observable<T>;
     update: (id: string | number, data: T) => Observable<T>;
@@ -18,8 +18,8 @@ export function createFeatureEffects<T extends object>(
     loadAll$: createEffect(() =>
       actions$.pipe(
         ofType(actions.loadAll),
-        mergeMap(() =>
-          service.getAll().pipe(
+        mergeMap(({filters}) =>
+          service.getAll(filters).pipe(
             map((data: T[]) => actions.loadAllSuccess({ data })),
             catchError((error) => of(actions.loadAllFailure({ error }))),
           ),

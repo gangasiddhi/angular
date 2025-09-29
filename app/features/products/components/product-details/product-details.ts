@@ -2,19 +2,20 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from "
 import { Store, select } from "@ngrx/store";
 import { productActions } from "../../store/product-actions";
 import { productSelectors } from "../../store/product-selectors";
-import { map, Observable, tap } from "rxjs";
-import { CommonModule } from "@angular/common";
+import { map, Observable } from "rxjs";
+import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { Product } from "../../model/product.model";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgOptimizedImage],
   templateUrl: "./product-details.html",
   styleUrl: "./product-details.scss",
   changeDetection:ChangeDetectionStrategy.OnPush
 })
+
 export class ProductDetails implements OnInit {
   private readonly _store = inject(Store);
   private readonly _destroyRef = inject(DestroyRef);
@@ -23,8 +24,7 @@ export class ProductDetails implements OnInit {
   protected readonly product$: Observable<Product | undefined | null> =
     this._store.pipe(
       select(productSelectors.selectSelected),
-      takeUntilDestroyed(this._destroyRef),
-      tap((product) => console.log("ProductDetails - product$", product)),
+      takeUntilDestroyed(this._destroyRef)
     );
 
   ngOnInit(): void {

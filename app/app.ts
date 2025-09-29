@@ -1,15 +1,14 @@
+import { NgComponentOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  inject,
-  ViewContainerRef,
+  computed
 } from "@angular/core";
-import { NgComponentOutlet } from '@angular/common';
 import { RouterOutlet } from "@angular/router";
-import { ButtonConfig } from "./shared/components/button/button-config";
 import { Breadcrumb } from "@shared/components/breadcrumb/breadcrumb";
 import { PageTitle } from "@shared/components/page-title/page-title";
 import { SideMenubar } from "@shared/components/side-menubar/side-menubar";
+import { ButtonConfig } from "./shared/components/button/button-config";
 
 @Component({
   standalone: true,
@@ -20,13 +19,11 @@ import { SideMenubar } from "@shared/components/side-menubar/side-menubar";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class App {
-  protected breadcrumb = Breadcrumb;
-  protected pageTitle = PageTitle;
-  protected sideMenubar = SideMenubar;
-  protected viewContainerRef = inject(ViewContainerRef);
+  protected breadcrumb = computed(() => Breadcrumb);
+  protected pageTitle = computed(() => PageTitle);
+  protected sideMenubar = computed(() => SideMenubar);
 
   constructor() {
-    console.log(this.viewContainerRef);
   }
 
   config: ButtonConfig = {

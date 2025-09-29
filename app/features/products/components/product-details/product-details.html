@@ -10,9 +10,11 @@
     <div class="flex gap-2">
       <img
         *ngFor="let img of product['images'].slice(1)"
-        [src]="img"
+        [ngSrc]="img"
         alt="Product image"
         class="w-20 h-20 rounded-md border cursor-pointer hover:opacity-75"
+        width="355"
+        height="355"
       />
     </div>
   </div>
