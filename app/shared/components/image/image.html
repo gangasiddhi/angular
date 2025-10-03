@@ -2,7 +2,7 @@
 <mat-spinner></mat-spinner>
 } @else {
 <img
-  [src]="hasError ? config().fallback : config().src"
+  [ngSrc]="hasError ? config().fallback : config().src"
   [alt]="config().alt"
   [width]="config().width"
   [height]="config().height"

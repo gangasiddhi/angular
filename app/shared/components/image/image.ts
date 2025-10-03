@@ -1,10 +1,11 @@
 import { Component, computed, input } from '@angular/core';
 import { CustomImageConfig } from './image-config';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   standalone: true,
-  imports: [MatProgressSpinnerModule],
+  imports: [MatProgressSpinnerModule, NgOptimizedImage],
   templateUrl: './image.html',
   styleUrl: './image.scss'
 })

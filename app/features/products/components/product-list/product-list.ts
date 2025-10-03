@@ -1,16 +1,17 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, OnInit } from "@angular/core";
 import { Store, select } from "@ngrx/store";
 import { productActions } from "../../store/product-actions";
 import { productSelectors } from "../../store/product-selectors";
 import { map, Observable } from "rxjs";
-import { CommonModule, NgOptimizedImage } from "@angular/common";
+import { CommonModule } from "@angular/common";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { Product } from "../../model/product.model";
 import { RouterLink } from "@angular/router";
+import { Image } from "@shared/components/image/image";
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterLink, NgOptimizedImage],
+  imports: [CommonModule, RouterLink],
   templateUrl: "./product-list.html",
   styleUrl: "./product-list.scss",
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -18,6 +19,7 @@ import { RouterLink } from "@angular/router";
 export class ProductList implements OnInit {
   private readonly _store = inject(Store);
   private readonly _destroyRef = inject(DestroyRef);
+  protected readonly image = computed(() => Image);
 
   protected readonly products$: Observable<Product[]> = this._store.pipe(
     select(productSelectors.selectEntities),
