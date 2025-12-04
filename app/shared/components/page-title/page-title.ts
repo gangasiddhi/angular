@@ -4,13 +4,9 @@ import {
   DestroyRef,
   inject,
   OnInit,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
 } from "@angular/core";
-import {
-  ActivatedRoute,
-  NavigationEnd,
-  Router
-} from "@angular/router";
+import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { filter, map, mergeMap } from "rxjs";
 import { Title } from "@angular/platform-browser";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
@@ -18,12 +14,11 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 @Component({
   standalone: true,
   imports: [],
-  templateUrl: './page-title.html',
-  styleUrl: './page-title.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: "./page-title.html",
+  styleUrl: "./page-title.scss",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageTitle implements OnInit {
-
   protected title = "";
   private readonly _cdr = inject(ChangeDetectorRef);
   private readonly _activatedRoute = inject(ActivatedRoute);

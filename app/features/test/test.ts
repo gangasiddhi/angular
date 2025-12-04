@@ -1,19 +1,26 @@
-import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, Component, inject, signal } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  signal,
+} from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { FormBuilder, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PendingChangesInterface } from "@shared/interfaces/pending-changes.interface";
 import { Observable } from "rxjs";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
+  imports: [RouterModule, FormsModule, ReactiveFormsModule],
   templateUrl: "./test.html",
   styleUrl: "./test.scss",
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Test implements PendingChangesInterface {
   private readonly _formBuilder = inject(FormBuilder);
+  private readonly _destroyedRef = inject(DestroyRef);
 
   protected testForm = this._formBuilder.group({
     name: [""],
@@ -23,9 +30,14 @@ export class Test implements PendingChangesInterface {
   hasUnsavedChanges = signal(false);
 
   constructor() {
-    this.testForm.valueChanges.subscribe(() =>
+   
+  }
+
+  ngOnInit(): void {
+    this.testForm.valueChanges.pipe(takeUntilDestroyed(this._destroyedRef)).subscribe(() =>
       this.hasUnsavedChanges.set(true),
     );
+
   }
 
   hasPendingChanges(): boolean | Observable<boolean> {

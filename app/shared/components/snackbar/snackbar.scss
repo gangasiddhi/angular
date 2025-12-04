@@ -1,0 +1,35 @@
+// Base styles for all buttons using @apply
+
+@reference "tailwindcss";
+
+.snackbar {
+  @apply fixed right-3 max-w-md mx-auto min-w-[200px] px-2 py-1 rounded-md shadow-lg text-[10px] space-x-3 transition-transform duration-300 ease-in-out leading-4;
+
+  &.top {
+    @apply top-4;
+  }
+
+  &.bottom {
+    @apply bottom-4;
+  }
+
+  &.info {
+    @apply bg-blue-100 border-l-4 border-blue-500 text-blue-700;
+  }
+
+  &.error {
+    @apply bg-red-100 border-l-4 border-red-500 text-red-700;
+  }
+
+  &.warning {
+    @apply bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700;
+  }
+
+  &.success {
+    @apply bg-green-100 border-l-4 border-green-500 text-green-700;
+  }
+
+  .mat-icon {
+    @apply absolute text-black font-semibold text-[12px] w-[12px] h-[12px] rounded-full top-2 right-2;
+  }
+}

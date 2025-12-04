@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+} from "@angular/core";
 import {
   ActivatedRoute,
   NavigationEnd,
@@ -7,15 +14,15 @@ import {
 } from "@angular/router";
 import { filter, map, Observable } from "rxjs";
 import { BreadcrumbInterface } from "./breadcrumb.interface";
-import { CommonModule } from "@angular/common";
+
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink],
   templateUrl: "./breadcrumb.html",
   styleUrl: "./breadcrumb.scss",
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Breadcrumb implements OnInit {
   private readonly _router = inject(Router);

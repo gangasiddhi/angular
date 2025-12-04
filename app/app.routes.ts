@@ -19,14 +19,6 @@ export const routes: Routes = [
     canDeactivate: [formChangeDetectionGuard],
   },
   {
-    path: "test1",
-    loadComponent: () => import("./features/test1/test1").then((m) => m.Test1),
-    data: {
-      title: "Test 1",
-    },
-    canDeactivate: [formChangeDetectionGuard],
-  },
-  {
     path: "products",
     loadChildren: () =>
       import("./features/products/product.routes").then((m) => m.routes),

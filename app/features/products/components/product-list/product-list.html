@@ -12,7 +12,9 @@
 
     <tr class="border-b-1">
       <td>
-        <ng-container [ngComponentOutlet]="image()" [ngComponentOutletInputs]="{
+        <ng-container
+          [ngComponentOutlet]="image()"
+          [ngComponentOutletInputs]="{
            imageOptions:{ 
               src: product['images'][0],
               alt: product.title, 
@@ -20,9 +22,11 @@
               height: 64,
               class: 'rounded',
               loading: 'lazy',
+              priority: false,
               fallback: '/assets/images/placeholder.png'
             }
-          }">
+          }"
+        >
         </ng-container>
       </td>
       <td>{{ product.title }}</td>

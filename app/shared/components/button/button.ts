@@ -3,7 +3,7 @@ import {
   input,
   output,
   ChangeDetectionStrategy,
-  HostBinding,
+  computed,
 } from "@angular/core";
 import { ButtonConfig } from "./button-config";
 
@@ -15,18 +15,27 @@ import { ButtonConfig } from "./button-config";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Button {
-  config = input.required<ButtonConfig>();
-  btnClick = output<string>();
+  protected readonly config = input.required<ButtonConfig>();
 
-  @HostBinding("class") get classBinding() {
-    return `btn btn-${this.config().variant || "primary"}`;
-  }
+  // default values
+  private readonly defaults: ButtonConfig = {
+    type: "button",
+    text: "Submit",
+    variant: "primary",
+    action: "submit",
+  };
+
+  protected readonly finalConfig = computed(() => ({
+    ...this.defaults,
+    ...this.config(),
+  }));
+
+  protected readonly btnClick = output<string>();
 
   onClick() {
-    if (this.config().action === undefined) {
+    if (this.finalConfig().action === undefined) {
       return;
     }
-
-    this.btnClick.emit(this.config().action ?? "");
+    this.btnClick.emit(this.finalConfig().action ?? "");
   }
 }

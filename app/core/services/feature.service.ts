@@ -12,7 +12,10 @@ export abstract class FeatureService<T> {
   protected abstract endpoint: string;
 
   // Generic GET method
-  getAll(params?: HttpParams): Observable<T[]> {
+  getAll(filters?: T | undefined, params?: HttpParams): Observable<T[]> {
+    if (filters) {
+      params = this._setFilters(params, filters);
+    }
     return this._http.get<T[]>(`${this._apiUrl}/${this.endpoint}`, { params });
   }
 
@@ -38,5 +41,21 @@ export abstract class FeatureService<T> {
     return this._http.delete<T>(`${this._apiUrl}/${this.endpoint}/${id}`, {
       params,
     });
+  }
+
+  private _setFilters<U extends object>(
+    params: HttpParams | undefined,
+    filters: U,
+  ): HttpParams | undefined {
+    if (!params) {
+      params = new HttpParams();
+    }
+    Object.keys(filters).forEach((key) => {
+      const value = (filters as Record<string, any>)[key];
+      if (value !== undefined) {
+        params = (params ?? new HttpParams()).set(key, value);
+      }
+    });
+    return params;
   }
 }

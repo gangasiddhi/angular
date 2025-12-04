@@ -89,7 +89,7 @@ describe("FeatureService", () => {
       expect(product).toEqual(updatedProduct);
     });
 
-    const req = httpMock.expectOne(`${apiUrl}/products`);
+    const req = httpMock.expectOne(`${apiUrl}/products/1`);
     expect(req.request.method).toBe("PUT");
     expect(req.request.body).toEqual(updatedProduct);
     req.flush(updatedProduct);
@@ -110,7 +110,7 @@ describe("FeatureService", () => {
   it("should pass HttpParams when provided", () => {
     const params = new HttpParams().set("sort", "desc");
 
-    service.getAll(params).subscribe();
+    service.getAll(undefined, params).subscribe();
 
     const req = httpMock.expectOne(
       (request) => request.url === `${apiUrl}/products`,

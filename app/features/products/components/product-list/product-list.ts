@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, OnInit } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  OnInit,
+} from "@angular/core";
 import { Store, select } from "@ngrx/store";
 import { productActions } from "../../store/product-actions";
 import { productSelectors } from "../../store/product-selectors";
@@ -14,7 +21,7 @@ import { Image } from "@shared/components/image/image";
   imports: [CommonModule, RouterLink],
   templateUrl: "./product-list.html",
   styleUrl: "./product-list.scss",
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductList implements OnInit {
   private readonly _store = inject(Store);
@@ -28,6 +35,6 @@ export class ProductList implements OnInit {
   );
 
   ngOnInit(): void {
-    this._store.dispatch(productActions.loadAll({ filters: { id: 1 } }));
+    this._store.dispatch(productActions.loadAll({ filters: { id: 2 } }));
   }
 }

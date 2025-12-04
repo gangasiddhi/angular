@@ -2,19 +2,14 @@
   <!-- Sidebar -->
   <ng-container [ngComponentOutlet]="sideMenubar()"></ng-container>
 
-
   <!-- Main content -->
   <main class="flex-1 p-6 bg-gray-100 overflow-y-auto">
     <ng-container [ngComponentOutlet]="pageTitle()"></ng-container>
     <ng-container [ngComponentOutlet]="breadcrumb()"></ng-container>
     <div class="mt-4 text-gray-700">
       <router-outlet />
+      <ng-container [ngComponentOutlet]="snackbar()"></ng-container>
+      <ng-container [ngComponentOutlet]="spinner()"></ng-container>
     </div>
   </main>
 </div>
-
-<!-- 
-<app-button
-      [config]="config"
-      (btnClick)="handleButtonClick($event)"
-    ></app-button> -->

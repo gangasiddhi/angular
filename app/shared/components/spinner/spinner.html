@@ -1,0 +1,11 @@
+<div
+  role="status"
+  aria-live="polite"
+  aria-busy="true"
+  [hidden]="!showSpinner()"
+  class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-opacity-75"
+>
+  <div
+    class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-500 mb-4"
+  ></div>
+</div>
