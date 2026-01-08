@@ -1,3 +1,19 @@
+<div class="flex flex-row flex-wrap gap-2 justify-between items-start">
+  @for (product of products$ | async; track product.id) {
+  <div class="min-w-58 max-w-58 min-h-76 max-h-76">
+    <ng-container
+      [ngComponentOutlet]="productCard()"
+      [ngComponentOutletInputs]="{
+       product: product
+      }"
+    >
+    </ng-container>
+    <!-- OR SIMPLER WAY -->
+    <!-- <productCard [product]="product"/>  -->
+  </div>
+  }
+</div>
+<!-- 
 <table class="w-full text-center">
   <thead>
     <tr>
@@ -12,9 +28,7 @@
 
     <tr class="border-b-1">
       <td>
-        <ng-container
-          [ngComponentOutlet]="image()"
-          [ngComponentOutletInputs]="{
+        <ng-container [ngComponentOutlet]="image()" [ngComponentOutletInputs]="{
            imageOptions:{ 
               src: product['images'][0],
               alt: product.title, 
@@ -25,8 +39,7 @@
               priority: false,
               fallback: '/assets/images/placeholder.png'
             }
-          }"
-        >
+          }">
         </ng-container>
       </td>
       <td>{{ product.title }}</td>
@@ -35,4 +48,4 @@
     </tr>
     }
   </tbody>
-</table>
+</table> -->

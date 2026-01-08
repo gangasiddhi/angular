@@ -5,15 +5,15 @@ import {
   inject,
   signal,
 } from "@angular/core";
-import { RouterModule } from "@angular/router";
 import { FormBuilder, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PendingChangesInterface } from "@shared/interfaces/pending-changes.interface";
 import { Observable } from "rxjs";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { CardHolder } from "@shared/components/card-holder/card-holder";
 
 @Component({
   standalone: true,
-  imports: [RouterModule, FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, CardHolder],
   templateUrl: "./test.html",
   styleUrl: "./test.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,17 +27,19 @@ export class Test implements PendingChangesInterface {
     email: [""],
   });
 
+  protected signalTestForm = signal({
+    name: "",
+    email: "",
+  });
+
   hasUnsavedChanges = signal(false);
 
-  constructor() {
-   
-  }
+  constructor() {}
 
   ngOnInit(): void {
-    this.testForm.valueChanges.pipe(takeUntilDestroyed(this._destroyedRef)).subscribe(() =>
-      this.hasUnsavedChanges.set(true),
-    );
-
+    this.testForm.valueChanges
+      .pipe(takeUntilDestroyed(this._destroyedRef))
+      .subscribe(() => this.hasUnsavedChanges.set(true));
   }
 
   hasPendingChanges(): boolean | Observable<boolean> {

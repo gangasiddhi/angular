@@ -1,4 +1,7 @@
-import { provideZonelessChangeDetection, ChangeDetectionStrategy } from "@angular/core";
+import {
+  provideZonelessChangeDetection,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { TestBed } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 import { App } from "./app";
@@ -73,7 +76,7 @@ describe("App", () => {
       // Verify the flex container structure which contains the sidebar
       const flexContainer = compiled.querySelector(".flex.h-screen");
       expect(flexContainer).toBeTruthy();
-      
+
       // The sidebar is rendered via ngComponentOutlet in the first ng-container
       // We verify this by checking the overall structure and that sideMenubar computed signal is defined
       const app = fixture.componentInstance;
@@ -99,11 +102,11 @@ describe("App", () => {
       // All 5 computed signals should have their components rendered
       const mainElement = compiled.querySelector("main");
       expect(mainElement).toBeTruthy();
-      
+
       // Verify the component structure exists (ng-container elements in template)
       const flexContainer = compiled.querySelector(".flex.h-screen");
       expect(flexContainer).toBeTruthy();
-      
+
       // Check that router outlet is present
       const routerOutlet = compiled.querySelector("router-outlet");
       expect(routerOutlet).toBeTruthy();
@@ -120,7 +123,7 @@ describe("App", () => {
     it("should use OnPush change detection strategy", () => {
       const fixture = TestBed.createComponent(App);
       // Try to read the compiled component metadata (Ivy) from the component type
-      const cmp = (fixture.componentRef.componentType as any).ɵcmp ?? (App as any).ɵcmp;
+      const cmp = (fixture.componentRef.componentType as any).ɵcmp;
       // We expect compiled metadata to be present; if it is, assert changeDetection equals OnPush
       if (cmp && cmp.changeDetection !== undefined) {
         expect(cmp.changeDetection).toBe(ChangeDetectionStrategy.OnPush);
@@ -136,7 +139,7 @@ describe("App", () => {
       expect(fixture.componentRef.instance).toBeTruthy();
       expect(fixture.componentRef.componentType).toBe(App);
       // The component's selector is defined as "app-root" in the @Component decorator
-      const componentMetadata = (fixture.componentRef as any).componentType.ɵcmp;
+      const componentMetadata = ((fixture.componentRef.componentType as any).ɵcmp ?? (App as any).ɵcmp);
       expect(componentMetadata).toBeDefined();
     });
   });

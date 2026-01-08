@@ -13,12 +13,13 @@ import { map, Observable } from "rxjs";
 import { CommonModule } from "@angular/common";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { Product } from "../../model/product.model";
-import { RouterLink } from "@angular/router";
+//import { RouterLink } from "@angular/router";
 import { Image } from "@shared/components/image/image";
+import { ProductCard } from "../product-card/product-card";
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: "./product-list.html",
   styleUrl: "./product-list.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,6 +28,7 @@ export class ProductList implements OnInit {
   private readonly _store = inject(Store);
   private readonly _destroyRef = inject(DestroyRef);
   protected readonly image = computed(() => Image);
+  protected readonly productCard = computed(() => ProductCard);
 
   protected readonly products$: Observable<Product[]> = this._store.pipe(
     select(productSelectors.selectEntities),

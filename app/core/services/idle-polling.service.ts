@@ -33,15 +33,17 @@ export class IdlePollingService implements OnDestroy {
     );
 
     // Update last activity, throttle to avoid excessive updates
-    activityEvents.pipe(throttleTime(500), takeUntil(this.destroy$)).subscribe(() => {
-      this.onActivity();
-    });
+    activityEvents
+      .pipe(throttleTime(500), takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.onActivity();
+      });
 
     // Periodically check for idle state
-    interval(1000*60*1)
+    interval(1000 * 60 * 1)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-        console.log('IdlePollingService checking idle state');
+        console.log("IdlePollingService checking idle state");
         const idleMs = Date.now() - this.lastActivity;
         if (!this.isIdle && idleMs >= this.idleTimeoutMs) {
           this.startPolling();

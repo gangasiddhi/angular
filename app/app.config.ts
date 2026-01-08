@@ -9,7 +9,11 @@ import { routes } from "./app.routes";
 import { provideHttpClient, withInterceptors } from "@angular/common/http";
 import { provideStore } from "@ngrx/store";
 import { loadingInterceptor } from "@core/interceptors/loading-interceptor";
-import { provideClientHydration, withIncrementalHydration } from "@angular/platform-browser";
+import {
+  provideClientHydration,
+  withIncrementalHydration,
+} from "@angular/platform-browser";
+import { idleInterceptor } from "@core/interceptors/idle-interceptor";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([loadingInterceptor])),
+    provideHttpClient(withInterceptors([idleInterceptor, loadingInterceptor])),
     provideStore({}), // Provide the store with an initial state
     provideAppInitializer(() => {
       console.log("App initialized");

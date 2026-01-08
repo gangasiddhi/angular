@@ -1,8 +1,6 @@
 import {
   ComponentFixture,
   TestBed,
-  fakeAsync,
-  tick,
 } from "@angular/core/testing";
 import { Breadcrumb } from "./breadcrumb";
 import {
@@ -55,6 +53,7 @@ describe("Breadcrumb Component", () => {
           provide: Router,
           useValue: {
             events: routerEvents$.asObservable(),
+            createUrlTree: jasmine.createSpy('createUrlTree').and.returnValue(null),
           },
         },
       ],
@@ -70,14 +69,15 @@ describe("Breadcrumb Component", () => {
     expect(component).toBeTruthy();
   });
 
-  it("should generate breadcrumbs from ActivatedRoute on navigation", fakeAsync(() => {
+  it("should generate breadcrumbs from ActivatedRoute on navigation", () => {
     component.ngOnInit();
+    fixture.detectChanges();
 
     routerEvents$.next(new NavigationEnd(1, "/home", "/home"));
-    tick(); // simulate async passage of time
+    fixture.detectChanges();
 
     expect(component["breadcrumbs"]).toEqual([{ label: "Home", url: "/home" }]);
-  }));
+  });
 
   it("should return an empty breadcrumb if no title is present", () => {
     const fakeRoute = {

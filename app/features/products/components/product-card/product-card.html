@@ -1,0 +1,36 @@
+<div class="bg-white rounded-lg shadow-md p-6 max-w-sm ml-0">
+  <div product-image>
+    <ng-container
+      [ngComponentOutlet]="image()"
+      [ngComponentOutletInputs]="{
+           imageOptions:{ 
+              src: product().images[0],
+              alt: product().title, 
+              width: 128,
+              height: 128,
+              class: 'rounded mx-auto',
+              loading: 'lazy',
+              priority: false,
+              fallback: '/assets/images/placeholder.png'
+            }
+          }"
+    >
+    </ng-container>
+  </div>
+  <div product-title>
+    <h4 class="text-lg font-semibold text-center mb-2 min-h-12 text-sm">
+      {{ product().title }}
+    </h4>
+  </div>
+  <div product-price>
+    <p class="text-center text-gray-700 mb-4">${{ product().price }}</p>
+  </div>
+  <div product-actions class="text-center bottom-4 w-full">
+    <a
+      [routerLink]="['/products', product().id]"
+      class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+    >
+      View Product
+    </a>
+  </div>
+</div>

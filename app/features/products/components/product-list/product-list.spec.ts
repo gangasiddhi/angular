@@ -15,7 +15,10 @@ describe("ProductList", () => {
       providers: [
         provideMockStore({
           selectors: [
-            { selector: productSelectors.selectEntities, value: { products: [] } },
+            {
+              selector: productSelectors.selectEntities,
+              value: { products: [] },
+            },
           ],
         }),
       ],

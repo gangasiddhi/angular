@@ -10,7 +10,6 @@ describe("ProductDetails", () => {
   let component: ProductDetails;
   let fixture: ComponentFixture<ProductDetails>;
 
-
   const sampleProduct = {
     id: 1,
     title: "Test Product",

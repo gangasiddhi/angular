@@ -22,5 +22,9 @@ export class SideMenubar {
       routeLink: "/products",
       label: "Products",
     },
+    {
+      routeLink: "/demo",
+      label: "Demo",
+    },
   ];
 }
